@@ -1,0 +1,84 @@
+<%!
+from c2corg_common.attributes import activities
+%>
+<%inherit file="base.html"/>
+
+<div class="guidebook">
+  <section class="site-intro not-logged">
+    <div class="intro-banner">
+      <h1 class="welcome-title text-center" translate>Let's go into the mountains!</h1>
+
+      <div class="find-a-tour">
+        <p class="head">Find a tour</p>
+        <div class="search-row">
+            <div>
+                <p>Activities</p>
+                <div class="route-activities text-center">
+                % for activity in activities:
+                    <a href="${request.route_url('outings_index')}#act=${activity}">
+                  <span class="activity icon-${activity}" uib-tooltip="{{mainCtrl.translate('${activity}')}}"></span>
+                </a>
+                % endfor
+                </div>
+            </div>
+            <div>
+                <p>Region</p>
+                <div>
+                    <input type="text" class="form-control">
+                    <a href="${request.route_url('routes_index')}">
+                        <button class="btn green-btn">
+                            <span translate>Go</span><br>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <h1>The guidebook</h1>
+    <p>The guidebook is an open knowledge-base ...</p>
+    <div class="types">
+        <div class="outings">
+            <p title="Latest conditions, ...">Outings</p>
+        </div>
+        <div class="waypoints">
+            <p title="Summits, lakes, climbing sites, huts, ...">Waypoints</p>
+        </div>
+        <div class="routes">
+            <p title="Routes, climbing pitches, ...">Routes</p>
+        </div>
+        <div class="waypoints">
+            <p title="...">Articles</p>
+        </div>
+        <div class="books">
+            <p title="...">Books</p>
+        </div>
+        <div class="waypoints">
+            <p title="...">Areas</p>
+        </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <h1>Waypoints</h1>
+    <div class="types">
+        <div class="waypoints">
+            <p title="Summits, lakes, passes, ...">Summits</p>
+        </div>
+        <div class="huts">
+            <p title="Huts, shelters, ...">Huts</p>
+        </div>
+        <div class="outings">
+            <p title="Indoor and outdoor climbing sites">Climbing sites</p>
+        </div>
+        <div class="paragliding">
+            <p title="...">Paragliding</p>
+        </div>
+    </div>
+    <a href="">More waypoints</a>
+  </section>
+
+</div>

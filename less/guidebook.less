@@ -1,0 +1,157 @@
+.guidebook {
+
+  button {
+    font-size: 1.3em;
+    margin: 5px;
+    @media @phone {
+      width: 100%;
+      font-size: 1em;
+    }
+    .small {
+      text-transform: none;
+    }
+  }
+
+  .site-intro {
+    @media @phone {
+      height: auto;
+
+      .route-activities {
+        display: none;
+      }
+    }
+
+    &.not-logged {
+      background-image:url(../img/guidebook/guidebook-banner.jpg);
+      background-size: cover;
+      background-position-y: 50%;
+    }
+
+    .welcome-title {
+      margin-top: 50px;
+      @media @phone {
+        //margin-top: 0;
+        font-size: 2em;
+      }
+    }
+    .welcome-title, .find-a-tour {
+      padding: 10px;
+      background-color: rgba(21, 50, 69, 0.3);
+    }
+
+    .intro-banner {
+      padding: 20px;
+      color: white;
+      width: 63%;
+      height: 100%;
+      margin: auto;
+      flex-flow: wrap row;
+      align-items: center;
+      .flex();
+      @media @tablet {
+        width: 80%;
+      }
+      @media @phone {
+        width: 100%;
+        p {
+          font-size: 1em !important;
+        }
+      }
+      >* {
+        width: 100%;
+      }
+      p {
+        font-size: 1.5em;
+      }
+    }
+
+    .find-a-tour {
+      .head {
+        font-size: 1.9em;
+        text-align: center;
+      }
+      .search-row {
+        display: flex;
+        justify-content: center;
+      }
+      .form-control {
+        width: 135px;
+        display: inline;
+      }
+
+    }
+
+    .route-activities {
+      font-size: 35px;
+      width: 250px;
+      margin: auto;
+      a {
+        color: @C2C-orange;
+        &:hover, &:focus {
+          text-decoration: none;
+          outline: none;
+        }
+      }
+      .activity {
+        background-color: white;
+        border-radius: 50%;
+        border: 1px solid #eee;
+        cursor: pointer;
+      }
+    }
+    .intro-shortcuts {
+      text-align: center;
+      padding: 10px 20px 20px 10px;
+
+      .glyphicon {
+        color: white;
+      }
+    }
+  }
+  .content {
+    padding: 30px;
+
+    h1 {
+      font-size: 2em;
+      border-bottom: 2px solid #FFAA45;
+    }
+
+    .types {
+      display: flex;
+      flex-wrap: wrap;
+
+      p {
+        padding: 5px;
+        text-align: center;
+        background-color: rgba(252, 248, 227, 0.57);
+      }
+
+      div {
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+        background-size: cover;
+        background-position-y: 50%;
+      }
+      .outings {
+        background-image:url(../img/guidebook/outings.jpg);
+      }
+      .waypoints {
+        background-image:url(../img/guidebook/waypoints.jpg);
+      }
+      .routes {
+        background-image:url(../img/guidebook/routes.jpg);
+      }
+      .books {
+        background-image:url(../img/guidebook/books.jpg);
+      }
+      .huts {
+        background-image:url(../img/guidebook/huts.jpg);
+      }
+      .paragliding {
+        background-image:url(../img/guidebook/paragliding.jpg);
+      }
+    }
+  }
+}
+
