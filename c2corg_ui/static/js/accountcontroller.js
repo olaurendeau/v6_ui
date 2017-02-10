@@ -1,6 +1,7 @@
 goog.provide('app.AccountController');
 
 goog.require('app');
+// goog.require('app.utils');
 goog.require('app.Alerts');
 
 
@@ -10,6 +11,7 @@ goog.require('app.Alerts');
  * @param {app.Alerts} appAlerts
  * @param {app.Api} appApi Api service.
  * @param {string} authUrl Base URL of the authentication page.
+ * @suppress {extraRequire|missingRequire}
  * @constructor
  * @ngInject
  */
@@ -37,6 +39,7 @@ app.AccountController = function($scope, appAuthentication, appAlerts,
   /**
    * @type {Object}
    * @private
+   * @suppress {extraRequire|missingRequire}
    */
   this.initialData_;
 
