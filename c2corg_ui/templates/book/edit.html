@@ -31,6 +31,14 @@ from c2corg_common.attributes import default_langs, quality_types, activities, b
 
         <section class="section">
           <h2 class="heading show-phone" translate>general informations</h2>
+
+          % if updating_doc:
+              ${book_id} ${book_lang}
+          % endif
+          {{editForm.$valid}}
+          {{editForm.$invalid}}
+          {{editCtrl.hasMissingProps('book')}}
+
           <div class="content">
 
             ## TITLE
@@ -193,7 +201,7 @@ from c2corg_common.attributes import default_langs, quality_types, activities, b
 
     </section>
   </form>
-
   ${show_preview_container()}
+
   ${show_save_confirmation_modal(updating_doc)}
 </section>
