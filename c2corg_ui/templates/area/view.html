@@ -9,7 +9,8 @@ from json import dumps
     photoswipe_gallery, get_document_locale_text, show_badge,
     show_missing_langs_links, show_other_langs_links, show_archive_data,
     delete_association_confirmation_modal, show_locale_title, show_float_buttons,
-    get_document_description, get_licence, show_merge_documents_dialog"/>
+    get_document_description, get_licence, show_merge_documents_dialog,
+    generate_share_metadata"/>
 <%namespace file="helpers/view.html" import="get_area_general"/>
 <%
 area_id = area['document_id']
@@ -60,6 +61,10 @@ area['doctype'] = 'areas'
     "topic_id": ${dumps(locale.get('topic_id'))},
     "title": ${dumps(get_title(locale)) | n}
   });
+</%block>
+
+<%block name="share">
+  ${generate_share_metadata(area, 'areas')}
 </%block>
 
 <header class="view-details-title">
