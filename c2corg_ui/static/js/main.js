@@ -21,6 +21,7 @@ goog.require('app.MapController');
 goog.require('app.addAssociationDirective');
 goog.require('app.advancedSearchDirective');
 goog.require('app.alertsDirective');
+goog.require('app.AssociatedRoutesController');
 goog.require('app.authDirective');
 goog.require('app.baselayerSelectorDirective');
 goog.require('app.blockAccountDirective');

@@ -315,8 +315,15 @@
         <span class="glyphicon glyphicon-map-marker"></span>
         <span translate>Associated routes</span><span class="glyphicon glyphicon-menu-down"></span>
       </h3>
-      <div class="associated-documents collapse in" id="associated-routes">
-        <div class="list-item" ng-repeat="doc in ${associations}" ng-class="{'new-item': doc['new']}">
+      <div class="associated-documents collapse in" id="associated-routes" ng-controller="AppAssociatedRoutesController as associatedRoutesCtrl" associations="${associations}">
+        <div class="activity-switches" style="width: 100%;">
+          <button
+            class="activity-switch btn btn-sm blue-btn {{enabled ? 'on' : 'off'}}"
+            ng-click="associatedRoutesCtrl.toggleActivity(activity)"
+            ng-repeat="(activity, enabled) in associatedRoutesCtrl.activities"
+            translate>{{activity | translate}}</button>
+        </div>
+        <div class="list-item" ng-repeat="doc in associatedRoutesCtrl.visibleDocuments" ng-class="{'new-item': doc['new']}">
           <app-card app-card-doc="doc"></app-card>
           % if type == 'routes':
             <app-delete-association child-doctype="routes" parent-id="${document['document_id']}" child-id="doc.document_id"
