@@ -710,6 +710,18 @@ updating_doc = route_id and route_lang
               <textarea app-markdown-editor name="description" ng-model="route.locales[0].description" class="form-control description"></textarea>
             </div>
 
+            ## Slackline Anchor 1
+            <div id="slackline_anchor1-group" class="form-group data full" ng-if="editCtrl.hasActivity(['slacklining'])">
+              <label translate>slackline_anchor1</label>
+              <textarea app-markdown-editor name="slackline_anchor1" ng-model="route.locales[0].slackline_anchor1" class="form-control"></textarea>
+            </div>
+
+            ## Slackline Anchor 2
+            <div id="slackline_anchor1-group" class="form-group data full" ng-if="editCtrl.hasActivity(['slacklining'])">
+              <label translate>slackline_anchor2</label>
+              <textarea app-markdown-editor name="slackline_anchor2" ng-model="route.locales[0].slackline_anchor2" class="form-control"></textarea>
+            </div>
+
             ## REMARKS
             <div id="remarks-group" class="form-group data full">
               <label translate>remarks</label>
@@ -726,18 +738,6 @@ updating_doc = route_id and route_lang
             <div id="gear-group" class="form-group data full">
               <label translate>specific gear</label>
               <textarea app-markdown-editor name="gear" ng-model="route.locales[0].gear" class="form-control" placeholder="{{'Describe here the gear needed for this route' | translate}}"></textarea>
-            </div>
-
-            ## Slackline Anchor 1
-            <div id="gear-group" class="form-group data full" ng-if="editCtrl.hasActivity(['slacklining'])">
-              <label translate>Anchor 1</label>
-              <textarea name="slackline_anchor1" ng-model="route.locales[0].slackline_anchor1" class="form-control"></textarea>
-            </div>
-
-            ## Slackline Anchor 2
-            <div id="gear-group" class="form-group data full" ng-if="editCtrl.hasActivity(['slacklining'])">
-              <label translate>Anchor 2</label>
-              <textarea name="slackline_anchor2" ng-model="route.locales[0].slackline_anchor2" class="form-control"></textarea>
             </div>
 
             ## GLACIER GEAR
