@@ -381,7 +381,7 @@ updating_doc = route_id and route_lang
               <label ng-class="{ 'control-label': editForm.route_length.$touched && editForm.route_length.$invalid }" translate>route_length</label>
               <div class="input-group">
                 <input type="number" min="0" minlength="1" name="route_length"
-                       ng-model="route.route_length" length-converter
+                       ng-model="route.route_length" app-length-converter
                        class="form-control" />
                 <span class="input-group-addon">km</span>
               </div>
@@ -401,7 +401,7 @@ updating_doc = route_id and route_lang
               <label ng-class="{ 'control-label': editForm.mtb_length_asphalt.$touched && editForm.mtb_length_asphalt.$invalid }" translate>mtb_length_asphalt</label>
               <div class="input-group">
                 <input type="number" min="0" minlength="1" name="mtb_length_asphalt"
-                       ng-model="route.mtb_length_asphalt" length-converter
+                       ng-model="route.mtb_length_asphalt" app-length-converter
                        class="form-control" />
                 <span class="input-group-addon">km</span>
               </div>
@@ -421,7 +421,7 @@ updating_doc = route_id and route_lang
               <label ng-class="{ 'control-label': editForm.mtb_length_trail.$touched && editForm.mtb_length_trail.$invalid }" translate>mtb_length_trail</label>
               <div class="input-group">
                 <input type="number" min="0" minlength="1" name="mtb_length_trail"
-                       ng-model="route.mtb_length_trail" length-converter
+                       ng-model="route.mtb_length_trail" app-length-converter
                        class="form-control" />
                 <span class="input-group-addon">km</span>
               </div>

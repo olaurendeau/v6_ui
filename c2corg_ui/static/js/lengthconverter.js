@@ -31,4 +31,4 @@ app.lengthConverterDirective = function() {
 };
 
 
-app.module.directive('lengthConverter', app.lengthConverterDirective);
+app.module.directive('appLengthConverter', app.lengthConverterDirective);

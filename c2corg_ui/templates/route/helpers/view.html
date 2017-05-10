@@ -193,11 +193,11 @@ from c2corg_ui.templates.utils import get_route_gear_articles, format_length
         % endif
 
         % if route.get('mtb_length_asphalt'):
-        <p><span translate class="value-title">mtb_length_asphalt</span>: <b class="value">${route['mtb_length_asphalt']/1000}&nbsp;km</b></p>
+        <p><span translate class="value-title">mtb_length_asphalt</span>: <b class="value">${format_length(route['mtb_length_asphalt']) | n}</b></p>
         % endif
 
         % if route.get('mtb_length_trail'):
-        <p><span translate class="value-title">mtb_length_trail</span>: <b class="value">${route['mtb_length_trail']/1000}&nbsp;km</b></p>
+        <p><span translate class="value-title">mtb_length_trail</span>: <b class="value">${format_length(route['mtb_length_trail']) | n}</b></p>
         % endif
 
         % if locale.get('slope'):
