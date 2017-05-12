@@ -13,6 +13,7 @@ from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
 import re
 
+
 class LTagProcessor(BlockProcessor):
     """ Process Tables. """
 
@@ -28,7 +29,7 @@ class LTagProcessor(BlockProcessor):
 
     def run(self, parent, blocks):
 
-        block = blocks.pop(0);
+        block = blocks.pop(0)
         row_count = 1
 
         if not self.test(parent, block):
@@ -50,7 +51,7 @@ class LTagProcessor(BlockProcessor):
 class LTagExtension(Extension):
     """ Add tables to Markdown. """
 
-    def extendMarkdown(self, md, md_globals):
+    def extendMarkdown(self, md, md_globals): # noqa
         """ Add an instance of TableProcessor to BlockParser. """
         if '|' not in md.ESCAPED_CHARS:
             md.ESCAPED_CHARS.append('|')
@@ -59,5 +60,5 @@ class LTagExtension(Extension):
                                       '<hashheader')
 
 
-def makeExtension(*args, **kwargs):
+def makeExtension(*args, **kwargs): # noqa
     return LTagExtension(*args, **kwargs)
