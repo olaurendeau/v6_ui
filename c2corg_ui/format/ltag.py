@@ -51,7 +51,7 @@ class LTagProcessor(BlockProcessor):
 class LTagExtension(Extension):
     """ Add tables to Markdown. """
 
-    def extendMarkdown(self, md, md_globals): # noqa
+    def extendMarkdown(self, md, md_globals):  # noqa
         """ Add an instance of TableProcessor to BlockParser. """
         if '|' not in md.ESCAPED_CHARS:
             md.ESCAPED_CHARS.append('|')
@@ -60,5 +60,5 @@ class LTagExtension(Extension):
                                       '<hashheader')
 
 
-def makeExtension(*args, **kwargs): # noqa
+def makeExtension(*args, **kwargs):  # noqa
     return LTagExtension(*args, **kwargs)
