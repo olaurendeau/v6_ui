@@ -12,6 +12,7 @@ from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
 import re
 
+
 class LTagPreprocessor(Preprocessor):
     """ Preprocess lines to clean LTag blocks """
 
