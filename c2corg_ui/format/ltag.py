@@ -101,7 +101,7 @@ class LTagProcessor(BlockProcessor):
         text = text.strip()
         matches = self.RE_LTAG.finditer(text)
 
-        for matchNum, match in enumerate(matches):
+        for match in matches:
             pitch_type = match.group(1)
             # modifier = match.group(2)
             pitch_number = self.row_count
