@@ -12,6 +12,9 @@ from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
 import re
 
+import logging;
+log = logging.getLogger(__name__)
+
 
 class LTagPreprocessor(Preprocessor):
     """ Preprocess lines to clean LTag blocks """
@@ -56,15 +59,52 @@ class LTagProcessor(BlockProcessor):
     """ Process LTags. """
 
     RE_LTAG_BLOCK = re.compile(r'^(?:[L|R]#(?:[^|\n]*(?:\|[^|\n]*)+)\n?)+$')
-    RE_LTAG = re.compile(r'([L|R])#(_|~|[0-9]*)')
-    ltag_template = '<span class="pitch"><span translate>{0}</span>{1}</span>'
+    RE_LTAG = re.compile(r'([L|R])#(_|~|-?\+?[0-9]*)([^-_!+0-9\s]*)')
+    RE_ADD_SUB_MODIFIER = re.compile(r'^[-+][0-9]*$')
+    ltag_template = '<span class="pitch"><span translate>{0}</span>{1}{2}</span>'
+    current_counter = 'default'
+    current_suffix = ''
     row_count = 1
+    alternative_row_count = 1
 
     def __init__(self, parser):
         super(LTagProcessor, self).__init__(parser)
 
     def reset_row_count(self):
+        self.current_counter = 'default'
+        self.current_suffix = ''
         self.row_count = 1
+        self.alternative_row_count = 1
+
+    def increment_row_count(self):
+        if (self.current_counter == 'default'):
+            self.row_count += 1
+        else:
+            self.alternative_row_count += 1
+
+    def decrement_row_count(self):
+        if (self.current_counter == 'default'):
+            self.row_count -= 1
+        else:
+            self.alternative_row_count -= 1
+
+    def set_row_count(self, count):
+        if (self.current_counter == 'default'):
+            self.row_count = count
+        else:
+            self.alternative_row_count = count   
+
+    def get_row_count(self):
+        return self.row_count if self.current_counter == 'default' else self.alternative_row_count
+
+    def switch_to_alternative_counter(self, suffix):
+        self.current_counter = 'alternative'
+        self.alternative_row_count = self.row_count
+        self.current_suffix = suffix
+
+    def switch_to_default_counter(self):
+        self.current_counter = 'default'
+        self.current_suffix = ''
 
     def is_ltag(self, text):
         return self.RE_LTAG_BLOCK.search(text) is not None
@@ -94,7 +134,7 @@ class LTagProcessor(BlockProcessor):
                 td = etree.SubElement(tr, 'td')
                 td.text = self.process_ltag(col)
 
-            self.row_count += 1
+            self.increment_row_count()
 
     def process_ltag(self, text):
 
@@ -103,18 +143,58 @@ class LTagProcessor(BlockProcessor):
 
         for match in matches:
             pitch_type = match.group(1)
-            # modifier = match.group(2)
-            pitch_number = self.row_count
+            modifier = match.group(2)
+            suffix = match.group(3)
+
+            log.info(modifier)
+
+            pitch_number = self.get_row_count()
+
+            if modifier.strip():
+                
+                # Reset alternative route
+                if modifier == '_':
+                    self.switch_to_default_counter()
+                    self.increment_row_count()
+                    pitch_number = self.get_row_count()
+
+                if self.is_int(modifier):
+
+                    # Add / Sub modifier
+                    if self.RE_ADD_SUB_MODIFIER.search(modifier) is not None:
+                        pitch_number += int(modifier)
+                    # Set modifier
+                    else:
+                        self.set_row_count(int(modifier))
+                        pitch_number = modifier
+
+            if suffix.strip():
+                self.switch_to_alternative_counter(suffix)
+                if modifier != '+':
+                    self.decrement_row_count()
+                pitch_number = self.get_row_count()
+            elif self.current_suffix != '':
+                suffix = self.current_suffix
+
+
 
             text = text.replace(
                 match.group(0),
                 self.ltag_template.format(
                     pitch_type,
-                    str(pitch_number)
+                    str(pitch_number),
+                    suffix
                 )
             )
 
         return text
+
+    def is_int(self, s):
+        try: 
+            int(s)
+            return True
+        except ValueError:
+            return False
 
 
 class C2CLTagExtension(Extension):
@@ -126,9 +206,8 @@ class C2CLTagExtension(Extension):
             md.ESCAPED_CHARS.append('|')
         ltagprocessor = LTagProcessor(md.parser)
         md.preprocessors.add('ltag', LTagPreprocessor(ltagprocessor), '_end')
-        md.parser.blockprocessors.add('ltag',
-                                      ltagprocessor,
-                                      '<hashheader')
+        md.parser.blockprocessors.add('ltag', ltagprocessor, '>quote')
+        log.info(md.parser.blockprocessors)
 
 
 def makeExtension(*args, **kwargs):  # noqa
